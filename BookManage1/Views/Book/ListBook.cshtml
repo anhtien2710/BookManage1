@@ -1,0 +1,59 @@
+﻿@model IEnumerable<BookManage1.Models.Book>
+
+@{ ViewBag.Title = "ListBook"; }
+
+<h2>List Book</h2>
+
+<p>
+    @Html.ActionLink("Tạo mới", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Author)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Images)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th></th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Title)
+    </td>
+    <td>
+        <textarea class="form-control" rows="3" id="description" disabled>@Html.DisplayFor(modelItem => item.Description)</textarea>
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Author)
+    </td>
+    <td>
+        <img src="~/Content/Images/@Html.DisplayFor(modelItem => item.Images)" width="70" height="100" alt="Book Cover" />
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Price)
+    </td>
+    <td>
+        @Html.ActionLink("Sửa", "Edit", new { id = item.ID }) |
+        @Html.ActionLink("Chi tiết", "Details", new { id = item.ID }) |
+        @Html.ActionLink("Xóa", "Delete", new { id = item.ID })
+    </td>
+    <td>
+        <a class="btn btn-primary" href="@Url.Action("Buy", "Book", new { id=item.ID })">Buy</a>
+    </td>
+</tr>}
+
+</table>
